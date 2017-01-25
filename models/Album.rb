@@ -30,4 +30,9 @@ class Album
     return results.map { |artist| Artist.new(artist) }
   end
 
+  def update()
+    sql = "UPDATE albums SET (title) = ('#{title}') WHERE id = #{@id};"
+    result = SqlRunner.run(sql)
+  end
+
 end
