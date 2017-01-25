@@ -1,14 +1,14 @@
-require_relative('pg')
+require('pg')
 
-class SqlRunner()
+class SqlRunner
 
   def self.run(sql)
    begin
-      db = PG.connect({dbname: 'Music', :host 'localhost'})
+      db = PG.connect({dbname: 'Music', host: 'localhost'})
       result = db.exec(sql)
     ensure
       db.close
-    end
+   end
   return result
   end
 end
