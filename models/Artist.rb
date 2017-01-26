@@ -21,10 +21,20 @@ class Artist
     return result.map{ |artist| Artist.new(artist)}
   end
 
+  # def albums()
+  #   sql = "SELECT * FROM albums WHERE artist_id = #{@id};"
+  #   results = SqlRunner.run(sql)
+  #   return results.map { |album_hash| Album.new( album_hash ) }
+  # end 
+
   def albums()
-    sql = "SELECT * FROM albums WHERE artist_id = #{@id};"
-    results = SqlRunner.run(sql)
-    return results.map { |album_hash| Album.new( album_hash ) }
+    sql = "SELECT art.name, alb.title, alb.genre FROM artists art
+    INNER JOIN albums alb 
+    ON art.id = alb.artist_id WHERE art.id = #{@id};"
+    albums = SqlRunner.run(sql)
+    return albums.each do |details|
+      puts details
+    end
   end 
 
   def update()
@@ -37,10 +47,9 @@ class Artist
     result = SqlRunner.run(sql)
   end
 
-  # def self.delete_all()
-  #   sql = "DELETE FROM artists;"
-  #   result = SqlRunner.run(sql)
-  # end
-
+  def self.delete_all()
+    sql = "DELETE FROM artists;"
+    result = SqlRunner.run(sql)
+  end
 
 end
