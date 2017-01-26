@@ -1,4 +1,3 @@
-require('pg')
 require_relative('../db/SqlRunner')
 
 class Album
@@ -31,7 +30,7 @@ class Album
   end
 
   def update()
-    sql = "UPDATE albums SET (title) = ('#{title}') WHERE id = #{@id};"
+    sql = "UPDATE albums SET (title) = ('#{@title}') WHERE id = #{@id};"
     result = SqlRunner.run(sql)
   end
 
@@ -41,7 +40,7 @@ class Album
   end
 
   # def self.delete_all()
-  #   sql = "DELETE * FROM artists;"
+  #   sql = "DELETE FROM albums;"
   #   result = SqlRunner.run(sql)
   # end
 
